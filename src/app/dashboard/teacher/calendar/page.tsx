@@ -13,6 +13,8 @@ import { enUS } from "date-fns/locale";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { CalendarEvent } from "@/lib/types";
 import CustomSiderTrigger from "../../_components/CustomSiderTrigger";
+import { CalendarToolbar } from "./_components/calendar-toolbar";
+import { CalendarHeader } from "./_components/calendar-header";
 const locales = {
   "en-US": enUS,
 };
@@ -71,8 +73,8 @@ export default function CalendarPage() {
     <div className="">
       <CustomSiderTrigger name={"Calendar"} />
 
-      <PageTitle title="Study Calendar" />
-      <Card className="w-[calc(100svw-50px)] p-4 md:w-full">
+      {/* <PageTitle title="Study Calendar" /> */}
+      <Card className="w-[calc(100svw-50px)] p-4 md:w-full rounded-3xl">
         <ScrollArea>
           <div className="h-[calc(100svh-150px)]">
             <Calendar
@@ -87,6 +89,10 @@ export default function CalendarPage() {
               views={[Views.MONTH, Views.WEEK, Views.DAY, Views.AGENDA]}
               eventPropGetter={eventStyleGetter}
               onSelectSlot={handleSelectSlot}
+              components={{
+                toolbar: CalendarToolbar,
+                header: CalendarHeader,
+              }}
               selectable
               popup
               className="calendar"

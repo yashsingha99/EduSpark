@@ -1,16 +1,17 @@
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../../../components/ui/select"
-import { ChevronLeft, ChevronRight } from "lucide-react"
-import { ToolbarProps, View, Views } from "react-big-calendar"
+} from "@/components/ui/select";
+
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ToolbarProps, View, Views } from "react-big-calendar";
 
 export function CalendarToolbar<TEvent extends object>(
-  props: ToolbarProps<TEvent>,
+  props: ToolbarProps<TEvent>
 ) {
   return (
     <div className="mb-4 flex items-center justify-between">
@@ -22,15 +23,16 @@ export function CalendarToolbar<TEvent extends object>(
         >
           <ChevronLeft className="h-4 w-4" />
         </Button>
+        <Button variant="outline" onClick={() => props.onNavigate("TODAY")}>
+          Today
+        </Button>
         <Button
           variant="outline"
+          // className="bg-[#F5F7F8]"
           size="icon"
           onClick={() => props.onNavigate("NEXT")}
         >
           <ChevronRight className="h-4 w-4" />
-        </Button>
-        <Button variant="outline" onClick={() => props.onNavigate("TODAY")}>
-          Today
         </Button>
       </div>
 
@@ -51,5 +53,5 @@ export function CalendarToolbar<TEvent extends object>(
         </SelectContent>
       </Select>
     </div>
-  )
+  );
 }

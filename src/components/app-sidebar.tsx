@@ -72,7 +72,7 @@ const AppSidebar = (props: React.ComponentProps<typeof Sidebar>) => {
   if (!userdata) return null;
 
   return (
-    <Sidebar className="p-2  " collapsible="icon" {...props}>
+    <Sidebar className="" collapsible="icon" {...props}>
       <SidebarHeader className="flex items-center">
         <TeamSwitcher />
       </SidebarHeader>

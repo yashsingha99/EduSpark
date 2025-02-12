@@ -1,17 +1,18 @@
-import { Badge } from "../../../components/ui/badge"
 import {
-  Dialog,
   DialogContent,
+  Dialog,
   DialogHeader,
   DialogTitle,
-} from "../../../components/ui/dialog"
-import { StudySession } from "../../../lib/types"
-import { formatTime } from "../../../lib/utils"
+  DialogClose,
+} from "@/components/ui/dialog";
+import { formatTime } from "@/lib/utils";
+import { StudySession } from "@/lib/types";
+import { Badge } from "@/components/ui/badge";
 
 interface SessionDialogProps {
-  session: StudySession | null
-  isOpen: boolean
-  onClose: () => void
+  session: StudySession | null;
+  isOpen: boolean;
+  onClose: () => void;
 }
 
 export function SessionDialog({
@@ -19,7 +20,7 @@ export function SessionDialog({
   isOpen,
   onClose,
 }: SessionDialogProps) {
-  if (!session) return null
+  if (!session) return null;
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -63,5 +64,5 @@ export function SessionDialog({
         </div>
       </DialogContent>
     </Dialog>
-  )
+  );
 }

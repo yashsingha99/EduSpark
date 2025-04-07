@@ -32,11 +32,13 @@ export function TeamSwitcher() {
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
               <div className="flex justify-center items-center">
-              {open  ?( <div className="font-semibold text-2xl">
-                  <span className="truncate">Edu</span>
+                {open ? (
+                  <div className="font-semibold text-2xl">
+                    <span className="truncate">Edu</span>
                     <span className="text-blue-500">Spark</span>
-                </div> ):  (
-                    <div className="font-semibold text-2xl">
+                  </div>
+                ) : (
+                  <div className="font-semibold text-2xl">
                     <span className="truncate">E</span>
                     <span className="text-blue-500">S</span>
                   </div>

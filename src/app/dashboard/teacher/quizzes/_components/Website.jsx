@@ -1,7 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined";
 import LanguageOutlinedIcon from "@mui/icons-material/LanguageOutlined";
+import axios from "axios";
+
 function Website({ setMethod }) {
+  const [url, setUrl] = useState();
+  const handleGenrate = async () => {
+    try {
+      const res = await axios.post("http://localhost:8000/handler", url);
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="bg-gray-100 flex flex-col min-h-screen">
       <button
@@ -40,12 +51,14 @@ function Website({ setMethod }) {
               </div>
               <input
                 type="text"
+                onChange={(e) => setUrl(e.target.value)}
                 id="website-search"
                 className="block w-full p-4 pl-12 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none"
                 placeholder="Enter the website link"
                 required
               />
               <button
+                onClick={handleGenrate}
                 type="submit"
                 className="text-white absolute right-2 bottom-2 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-3 bg-blue-900"
               >
@@ -66,7 +79,7 @@ function Website({ setMethod }) {
               className="mb-4 flex items-center p-2 bg-blue-50 rounded-md transition-transform transform hover:scale-105 cursor-pointer"
             >
               <span className="text-blue-600 mr-2">✔️</span>
-              <span>{`Step ${index + 1}: ${step}`}</span>
+              <span> {`Step ${index + 1}: ${step}`} </span>
             </li>
           ))}
         </ul>

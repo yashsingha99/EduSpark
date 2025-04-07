@@ -42,19 +42,20 @@ const AppSidebar = (props: React.ComponentProps<typeof Sidebar>) => {
   const router = useRouter();
   const userdata = React.useMemo(() => getUserData(), []);
   const { isMobile, open } = useSidebar();
-
+  console.log(open);
+ 
   // Redirect to login if user data is unavailable
-  React.useEffect(() => {
-    if (!userdata || !userdata.role) {
-      router.push("/");
-    }
-  }, [userdata, router]);
+  // React.useEffect(() => {
+    // if (!userdata || !userdata.role) {
+    //   router.push("/");
+    // }
+  // }, [userdata, router]);
 
   // Define student and teacher navigation items
   const navigationData = React.useMemo(() => {
-    if (!userdata) return null;
+    // if (!userdata) return null;
 
-    const commonUser = {
+    let commonUser = {
       name: `${userdata?.firstName ?? "User"} ${
         userdata?.lastName ?? ""
       }`.trim(),
@@ -62,31 +63,40 @@ const AppSidebar = (props: React.ComponentProps<typeof Sidebar>) => {
       avatar: "/avatars/shadcn.jpg",
     };
     
-    if (userdata.role === "student") {
-      return { ...studentItems, user: userdata };
-    }
-    return { ...teacherItems, user: userdata };
+    // if (userdata.role === "student") {
+    //   return { ...studentItems, user: userdata };
+    // }
+    return { ...teacherItems, user: commonUser };
 
   }, [userdata]);
 
-  if (!userdata) return null;
+  // if (!userdata) return null;
+    let commonUser = {
+      name: `${userdata?.firstName ?? "User"} ${
+        userdata?.lastName ?? ""
+      }`.trim(),
+      email: userdata?.email ?? "unknown@example.com",
+      avatar: "/avatars/shadcn.jpg",
+    };
 
   return (
     <Sidebar className="" collapsible="icon" {...props}>
       <SidebarHeader className="flex items-center">
         <TeamSwitcher />
-      </SidebarHeader>
-      {open &&
-      <div className=" w-full  items-center  justify-center">
-        <CommandMenu />
-      </div>}
+      </SidebarHeader> 
+      {/* { open && */}
+        <div className=" w-full  items-center  justify-center">
+          <CommandMenu />
+        </div>
+      {/* } */}
+
       {/* <Separator orientation="horizontal" className="mr-2 h-4" /> */}
 
       <SidebarContent>
         <NavMain items={navigationData?.navMain ?? []} />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={userdata} />
+        <NavUser user={commonUser} />
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>

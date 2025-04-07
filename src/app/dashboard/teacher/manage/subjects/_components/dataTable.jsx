@@ -13,10 +13,28 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react";
-
+import {
+  ArrowUpDown,
+  ChevronDown,
+  MoreHorizontal,
+  Check,
+  ChevronsUpDown,
+} from "lucide-react";
+import { cn } from "@/lib/utils";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
-// import { Checkbox } from "@/components/ui/checkbox";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -36,39 +54,38 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-const data = [
-  {
-    id: "m5gr84i9",
-    amount: 316,
-    status: "success",
-    email: "ken99@yahoo.com",
-  },
-  {
-    id: "3u1reuv4",
-    amount: 242,
-    status: "success",
-    email: "Abe45@gmail.com",
-  },
-  {
-    id: "derv1ws0",
-    amount: 837,
-    status: "processing",
-    email: "Monserrat44@gmail.com",
-  },
-  {
-    id: "5kma53ae",
-    amount: 874,
-    status: "success",
-    email: "Silas22@gmail.com",
-  },
-  {
-    id: "bhqecj4p",
-    amount: 721,
-    status: "failed",
-    email: "carmella@hotmail.com",
-  },
-];
-
+// const data = [
+//   {
+//     id: "m5gr84i9",
+//     amount: 316,
+//     status: "success",
+//     email: "ken99@yahoo.com",
+//   },
+//   {
+//     id: "3u1reuv4",
+//     amount: 242,
+//     status: "success",
+//     email: "Abe45@gmail.com",
+//   },
+//   {
+//     id: "derv1ws0",
+//     amount: 837,
+//     status: "processing",
+//     email: "Monserrat44@gmail.com",
+//   },
+//   {
+//     id: "5kma53ae",
+//     amount: 874,
+//     status: "success",
+//     email: "Silas22@gmail.com",
+//   },
+//   {
+//     id: "bhqecj4p",
+//     amount: 721,
+//     status: "failed",
+//     email: "carmella@hotmail.com",
+//   },
+// ];
 
 export const columns = [
   {
@@ -97,7 +114,9 @@ export const columns = [
   },
 ];
 
-export function DataTable({data}) {
+export function DataTable({ data }) {
+  console.log(data);
+
   const [sorting, setSorting] = React.useState([]);
   const [columnFilters, setColumnFilters] = React.useState([]);
   const [columnVisibility, setColumnVisibility] = React.useState({});
@@ -122,12 +141,14 @@ export function DataTable({data}) {
     },
   });
 
+  const head = ["Subject", "Code", "Discription", "Faculties"];
+
   return (
     <div className="w-full">
       <div className="flex items-center py-4">
         <Input
           placeholder="Filter subjects..."
-          value={(table.getColumn("subjects")?.getFilterValue() ?? "")}
+          value={table.getColumn("subjects")?.getFilterValue() ?? ""}
           onChange={(event) =>
             table.getColumn("subjects")?.setFilterValue(event.target.value)
           }
@@ -138,31 +159,26 @@ export function DataTable({data}) {
       <div className="rounded-md border">
         <Table>
           <TableHeader>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => (
-                  <TableHead key={header.id}>
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(header.column.columnDef.header, header.getContext())}
-                  </TableHead>
-                ))}
-              </TableRow>
-            ))}
+            <TableRow>
+              {head.map((header) => (
+                <TableHead key={header}>{header}</TableHead>
+              ))}
+            </TableRow>
           </TableHeader>
           <TableBody>
-            {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
-                <TableRow
-                  key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
-                >
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
-                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                    </TableCell>
-                  ))}
-                </TableRow>
+            {data.map((subject) => (
+              <TableRow key={subject._id}>
+                <TableCell>{subject.name}</TableCell>
+                <TableCell>{subject.code}</TableCell>
+                <TableCell>{subject.description}</TableCell>
+                <ComboboxDemo />
+                {/* <TableCell>
+                    {subject.name}
+                  </TableCell> */}
+              </TableRow>
+            ))}
+            {/* {data && data?.map((subject) => (
+                
               ))
             ) : (
               <TableRow>
@@ -173,7 +189,7 @@ export function DataTable({data}) {
                   No results.
                 </TableCell>
               </TableRow>
-            )}
+            )} */}
           </TableBody>
         </Table>
       </div>
@@ -202,5 +218,78 @@ export function DataTable({data}) {
         </div>
       </div>
     </div>
+  );
+}
+
+const frameworks = [
+  {
+    value: "next.js",
+    label: "Next.js",
+  },
+  {
+    value: "sveltekit",
+    label: "SvelteKit",
+  },
+  {
+    value: "nuxt.js",
+    label: "Nuxt.js",
+  },
+  {
+    value: "remix",
+    label: "Remix",
+  },
+  {
+    value: "astro",
+    label: "Astro",
+  },
+];
+
+export function ComboboxDemo({faculties}) {
+  const [open, setOpen] = React.useState(false);
+  const [value, setValue] = React.useState("");
+  return (
+    <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger asChild>
+        <Button
+          variant="outline"
+          role="combobox"
+          aria-expanded={open}
+          className="w-[200px] justify-between"
+        >
+          {value
+            ? faculties.find((faculty) => faculty.value === value)?.label
+            : "Select framework..."}
+          <ChevronsUpDown className="opacity-50" />
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="w-[200px] p-0">
+        <Command>
+          <CommandInput placeholder="Search framework..." className="h-9" />
+          <CommandList>
+            <CommandEmpty>No faculty found.</CommandEmpty>
+            <CommandGroup>
+              {faculties?.map((faculty) => (
+                <CommandItem
+                  key={faculty.value}
+                  value={faculty.value}
+                  onSelect={(currentValue) => {
+                    setValue(currentValue === value ? "" : currentValue);
+                    setOpen(false);
+                  }}
+                >
+                  {faculty.label}
+                  <Check
+                    className={cn(
+                      "ml-auto",
+                      value === faculty.value ? "opacity-100" : "opacity-0"
+                    )}
+                  />
+                </CommandItem>
+              ))}
+            </CommandGroup>
+          </CommandList>
+        </Command>
+      </PopoverContent>
+    </Popover>
   );
 }

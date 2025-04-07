@@ -1,3 +1,11 @@
 admin:
-   update subject ui 
+   update subject ui and add skeleton
    
+
+faculty:  
+   req for section change
+   data of students, whose got best placements ( read )
+
+student, faculty:  
+                schedule one meeting ( student <----> faculty)
+         

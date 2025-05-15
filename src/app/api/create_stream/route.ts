@@ -16,6 +16,8 @@ export async function POST(req: Request) {
     return Response.json(response);
   } catch (err) {
     if (err instanceof Error) {
+      console.log(err);
+      
       return new Response(err.message, { status: 500 });
     }
 

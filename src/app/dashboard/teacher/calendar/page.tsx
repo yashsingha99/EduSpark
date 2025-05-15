@@ -32,19 +32,25 @@ export default function CalendarPage() {
   const [view, setView] = useState<View>(Views.MONTH);
   const [date, setDate] = useState(new Date());
 
-  const handleSelectSlot = async ({ start, end }: { start: Date; end: Date }) => {
-    const sections = ["A", "B", "C", "D"];
-    let section = prompt(`Select a section (${sections.join(", ")}):`);
+const handleSelectSlot = async ({ start, end }: { start: Date; end: Date }) => {
+  const sections = ["A", "B", "C", "D"];
+  let section = prompt(`Select a section (${sections.join(", ")}):`);
 
-    // Validate section input
-    while (!sections.includes(section || "")) {
-      section = prompt(`Invalid section! Please select from (${sections.join(", ")}):`);
-      if (section === null) return; // User canceled
-    }
+  if (section === null) return; // User cancelled
 
-    const title = `Study Section ${section}`;
-    setEvents([...events, { title, start, end, section: section! }]);
-  };
+  section = section.trim().toUpperCase();
+
+  while (!sections.includes(section)) {
+    section = prompt(`Invalid section! Please select from (${sections.join(", ")}):`);
+    if (section === null) return; // User cancelled
+    section = section.trim().toUpperCase();
+  }
+
+  const title = `Study Section ${section}`;
+  setEvents(prev => [...prev, { title, start, end, section }]);
+};
+
+
 
   const eventStyleGetter = (event: CalendarEvent) => {
     return {
@@ -72,8 +78,7 @@ export default function CalendarPage() {
   return (
     <div className="">
       <CustomSiderTrigger name={"Calendar"} />
-
-      {/* <PageTitle title="Study Calendar" /> */}
+ 
       <Card className="w-[calc(100svw-50px)] p-4 md:w-full rounded-3xl">
         <ScrollArea>
           <div className="h-[calc(100svh-150px)]">

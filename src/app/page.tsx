@@ -8,6 +8,7 @@ import VanillaTilt from 'vanilla-tilt';
 import './landing.css';
 import Image from "next/image"
 import animated from "../assets/animated.png"
+import Link from 'next/link';
 // Import your images here - using placeholders for this example
 // Example: import logo from './assets/logo.svg';
 
@@ -222,11 +223,11 @@ const Page = () => {
       <div className="navbar" ref={navbarRef}>
         <ul>
           <li>
-            <a href="#action">Actions</a>
+            <Link href="/dashboard/teacher">Teacher Dashboard</Link>
             <div className="glowNavbar"></div>
           </li>
           <li>
-            <a href="#integration">Integrations</a>
+            <Link href="/dashboard/student">Student Dashboard</Link>
             <div className="glowNavbar"></div>
           </li>
           <li>
@@ -241,9 +242,11 @@ const Page = () => {
         </ul>
       </div>
 
+     
+
       <div className="heroSection" ref={heroSectionRef}>
         <div className="heroText">
-          <h1>Alice</h1>
+          <h1>EduSpark</h1>
         </div>
         <div className="brandList">
           <Image src="/Images/product1.svg" alt="Product 1" width={120} height={50} />
@@ -504,7 +507,7 @@ const Page = () => {
         </div>
 
         <div className="credits" data-tilt data-tilt-speed="5000" data-tilt-reverse="true">
-          <h5>Developed By Nitish Singh</h5>
+          <h5>Developed By Yash Singhal</h5>
         </div>
       </div>
     </div>

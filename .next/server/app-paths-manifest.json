@@ -1,4 +1,9 @@
 {
   "/_not-found/page": "app/_not-found/page.js",
-  "/dashboard/teacher/manage/students/page": "app/dashboard/teacher/manage/students/page.js"
+  "/dashboard/teacher/page": "app/dashboard/teacher/page.js",
+  "/dashboard/teacher/groups/page": "app/dashboard/teacher/groups/page.js",
+  "/dashboard/teacher/manage/students/page": "app/dashboard/teacher/manage/students/page.js",
+  "/dashboard/teacher/mylectures/page": "app/dashboard/teacher/mylectures/page.js",
+  "/dashboard/teacher/quizzes/page": "app/dashboard/teacher/quizzes/page.js",
+  "/dashboard/teacher/calendar/page": "app/dashboard/teacher/calendar/page.js"
 }

@@ -40,6 +40,8 @@ export function BroadcastDialog({ children }: { children: React.ReactNode }) {
         },
       }),
     });
+    console.log(res);
+    
     const respone = await fetch("/api/create_stream", {
       method: "POST",
       headers: { "Content-Type": "application/json" },

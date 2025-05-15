@@ -1,8 +1,55 @@
-# React + Vite
+# 🎓 LMS Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-featured Learning Management System (LMS) built with:
+- **Next.js** for frontend rendering and SSR
+- **Node.js + TypeScript** for a type-safe backend
+- **MongoDB** for data storage
+- **WebSocket** for real-time features
+- **LiveKit (SDK + Cloud)** for live audio/video communication
+- Deployed on **Vercel**
+- Runs locally at `http://localhost:3000`
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
+
+- ✨ User Authentication (JWT/session-based)
+- 📚 Course Management (create, edit, delete, enroll)
+- 🧠 Lesson & Quiz Management
+- 🧑‍🏫 Teacher/Student Roles
+- 🔴 Real-time Classrooms (via WebSocket & LiveKit)
+- 🎥 Live Video/Audio Rooms using LiveKit Cloud
+- 🗂️ Dashboard (Instructor & Student)
+- 🌐 SEO Optimized with SSR
+- 📱 Fully Responsive UI
+- ⚙️ Admin Panel
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer        | Tech Stack                           |
+|--------------|--------------------------------------|
+| Frontend     | Next.js, Tailwind CSS, TypeScript    |
+| Backend      | Node.js, Express (if used), TypeScript |
+| Database     | MongoDB (Mongoose ODM)               |
+| Real-Time    | WebSocket, LiveKit SDK               |
+| Deployment   | Vercel (frontend), optional backend on EC2/Render |
+| Auth         | JWT or NextAuth                      |
+
+---
+
+## 📦 Getting Started
+
+### Prerequisites
+
+- Node.js `>=18.x`
+- MongoDB (local or Atlas)
+- LiveKit Cloud project
+- Vercel account (for deployment)
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/yashsingha99/Eduspark.git
+cd Eduspark
